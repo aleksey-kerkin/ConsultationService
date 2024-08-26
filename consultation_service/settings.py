@@ -61,6 +61,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "consultation_service.wsgi.application"
 
+AUTH_USER_MODEL = "consultations.User"
+
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
