@@ -27,7 +27,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "rest_framework_simplejwt",
+    "djoser",
     "drf_spectacular",
+    "drf_spectacular_sidecar",
     "consultations",
 ]
 
@@ -125,6 +127,13 @@ REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
+# Djoser settings
+
+DJOSER = {
+    "USER_CREATE_PASSWORD_RETYPE": True,
+    "SEND_ACTIVATION_EMAIL": False,
+}
+
 # JWT settings
 
 SIMPLE_JWT = {
@@ -134,6 +143,9 @@ SIMPLE_JWT = {
 # Spectacular settings
 
 SPECTACULAR_SETTINGS = {
+    "SWAGGER_UI_DIST": "SIDECAR",
+    "SWAGGER_UI_FAVICON_HREF": "SIDECAR",
+    "REDOC_DIST": "SIDECAR",
     "TITLE": "Consultation Service API",
     "DESCRIPTION": "API for planning consultations",
     "VERSION": "1.0.0",
@@ -150,3 +162,33 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "your_email@gmail.com"
 EMAIL_HOST_PASSWORD = "your_email_password"
 DEFAULT_FROM_EMAIL = "your_email@gmail.com"
+
+# Logging settings
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "file": {
+            "level": "DEBUG",
+            "class": "logging.FileHandler",
+            "filename": BASE_DIR / "debug.log",
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["file"],
+            "level": "DEBUG",
+            "propagate": True,
+        },
+    },
+}
+
+# Cache settings
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+        "LOCATION": "unique-snowflake",
+    }
+}
