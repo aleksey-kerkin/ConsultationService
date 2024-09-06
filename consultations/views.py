@@ -8,10 +8,16 @@ from rest_framework.response import Response
 
 from .models import Consultation, Slot, Specialist, User
 from .permissions import IsClientOrReadOnly, IsSpecialistOrReadOnly
-from .serializers import (ConsultationSerializer, CustomUserSerializer,
-                          SlotSerializer, SpecialistSerializer)
-from .utils import (send_cancellation_notification,
-                    send_consultation_notification)
+from .serializers import (
+    ConsultationSerializer,
+    CustomUserSerializer,
+    SlotSerializer,
+    SpecialistSerializer,
+)
+from .utils import (
+    send_cancellation_notification,
+    send_consultation_notification,
+)
 
 logger = logging.getLogger(__name__)
 
