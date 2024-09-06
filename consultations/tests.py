@@ -7,7 +7,9 @@ from .models import Consultation, Slot, Specialist, User
 class ConsultationTests(TestCase):
     def setUp(self):
         self.client = APIClient()
-        self.user = User.objects.create_user(username="testuser", password="testpass")
+        self.user = User.objects.create_user(
+            username="testuser", password="testpass"
+        )
         self.client.force_authenticate(user=self.user)
 
     def test_create_consultation(self):
@@ -20,7 +22,7 @@ class ConsultationTests(TestCase):
             service_type="Test Service",
         )
         response = self.client.post(
-            "/api/consultations/", {"slot": slot.id, "client": self.user.id}
+            "/api/consultations/", {"slot": slot.pk, "client": self.user.pk}
         )
         self.assertEqual(response.status_code, 201)
         self.assertEqual(Consultation.objects.count(), 1)
@@ -36,7 +38,8 @@ class ConsultationTests(TestCase):
         )
         consultation = Consultation.objects.create(slot=slot, client=self.user)
         response = self.client.post(
-            f"/api/consultations/{consultation.id}/cancel/", {"reason": "Test reason"}
+            f"/api/consultations/{consultation.pk}/cancel/",
+            {"reason": "Test reason"},
         )
         self.assertEqual(response.status_code, 200)
         consultation.refresh_from_db()
