@@ -3,8 +3,12 @@ from django.urls import include, path
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework.routers import DefaultRouter
 
-from consultations.views import (ConsultationViewSet, SlotViewSet,
-                                 SpecialistViewSet, UserViewSet)
+from consultations.views import (
+    ConsultationViewSet,
+    SlotViewSet,
+    SpecialistViewSet,
+    UserViewSet,
+)
 
 router = DefaultRouter()
 router.register(r"users", UserViewSet)
